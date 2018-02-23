@@ -17,7 +17,6 @@ $(function(){
 		function(data){
 			dataparse = jQuery.parseJSON(data);
 			$('#edit-username').val(dataparse[0]['user_login']);
-			//$('#edit-oldPassword').val(dataparse[0]['user_password']);
 			$('#edit-firstName').val(dataparse[0]['user_firstName']);
 			$('#edit-lastName').val(dataparse[0]['user_lastName']);
 			$('#edit-email').val(dataparse[0]['user_email']);

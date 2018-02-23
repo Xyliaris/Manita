@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
- 
+      href_url = window.location.href;
       $("#userTable").jqGrid({
-        url:'http://localhost:9090/codentretien/administration/loadusersdata',
+        url: href_url +'/loadusersdata',
         datatype: "json",
         colNames:['id',"Nom d'Utilisateur", "Prénom", "Nom", "Groupe", "Adresse Mail"],
         colModel:[
@@ -26,9 +26,9 @@ $(document).ready(function () {
         caption:"Table Gestion Utilisateur",
         onSelectRow: function(id){
           idUser = $('#userTable').jqGrid('getCell', id, 'user_id');
-          url = "http://localhost:9090/codentretien/administration/setusergroup";
+          url = href_url + "/setusergroup";
 
-          $.get('http://localhost:9090/codentretien/administration/userinfos?idUser=' + jQuery("#userTable").jqGrid('getCell', id, 'user_id'),
+          $.get( href_url + '/userinfos?idUser=' + jQuery("#userTable").jqGrid('getCell', id, 'user_id'),
             function(data){
               dataparse = jQuery.parseJSON(data);
               $("#edit_groupList").val(dataparse[0]['user_idGroup']);

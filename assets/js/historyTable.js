@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
-      url = "http://localhost:9090/codentretien/"
+      href_url = window.location.href;
       $("#historyTable").jqGrid({
-        url:'http://localhost:9090/codentretien/history/getTicketsGrid',
+        url: href_url + '/getTicketsGrid',
         datatype: "json",
         colNames:['id',"Titre", "Description", "Prénom", "Nom" ,"Date de Creation", "Status"],
         colModel:[
@@ -25,7 +25,7 @@ $(document).ready(function () {
         loadonce: true,
         caption:"Historique",
         onSelectRow: function(id){
-            $.get(url+"history/getticketdetail?ticketID=" + $("#historyTable").jqGrid('getCell', id, "ticket_id"),
+            $.get(href_url + "/getticketdetail?ticketID=" + $("#historyTable").jqGrid('getCell', id, "ticket_id"),
               function(data){
               data = jQuery.parseJSON(data);
               $("#ticket-title").text(data[0]['ticket_title']);

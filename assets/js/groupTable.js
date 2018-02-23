@@ -1,12 +1,12 @@
 $(document).ready(function () {
- 
+  href_url = window.location.href;
   $("#groupTable").jqGrid({
-      url:'http://localhost:9090/codentretien/groupmanagement/groupList',
+      url: href_url + '/groupList',
     datatype: "json",
       colNames:['id',"Nom du groupe"],
       colModel:[
         {name:'idGroup',      index:'idGroup',      width:55,   template: "integerStr"},
-        {name:'labelGroup',   index:'labelGroup',   width:90},
+        {name:'labelGroup',   index:'labelGroup',   width:90                          },
       ],
       rowNum:10,
       rowList:[10,20,30],
@@ -14,6 +14,8 @@ $(document).ready(function () {
       viewrecords: true,
       sortorder: "asc",
       loadonce: true,
+      //autowidth: true,
+      //multiSort: true,
       pager : '#gridpager',
       width: 200,
       height: "auto",
@@ -36,17 +38,16 @@ $(document).ready(function () {
               });
               data = {idGroup: jQuery("#groupTable").jqGrid('getCell', id, "idGroup"), 
                      newlabelgroup: $('#labelgroup').val(), permissions: permList};
-              url = 'http://localhost:9090/codentretien/groupmanagement/savePermissions';
+              url = href_url + '/savePermissions';
               $.ajax({
                 type: 'POST',
                 url: url,
                 data: data,
                 success: function(){
-                   $("#groupDialog").dialog("close");
-                   $('#groupTable').trigger( "reloadGrid" );
+                   $("#groupDialog").dialog("close"); 
                 }
                });
-
+              $('#groupTable').trigger( "reloadGrid" );
             },
             "Annuler": function(){
               $( this ).dialog( "close" );
@@ -59,7 +60,7 @@ $(document).ready(function () {
             }
         });
         // Get permissions for the group and check the checkboxes
-        $.get("http://localhost:9090/codentretien/groupmanagement/permissionsByGroup?group=" + jQuery("#groupTable").jqGrid('getCell', id, "idGroup"),
+        $.get( href_url + "/permissionsByGroup?group=" + jQuery("#groupTable").jqGrid('getCell', id, "idGroup"),
           function(data){
             map = jQuery.parseJSON(data); //parsing String Data to JSON
             $.each(map, function(id, perms){ 

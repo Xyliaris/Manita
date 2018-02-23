@@ -17,6 +17,7 @@ $( function() {
       tips = $( ".validateTips" ),
       data = {username: username.val(), password: password.val(), email: email.val(), birthdate: birthdate.val(),
       gender : gender, numberphone: numberphone.val(), firstname: firstname.val(),lastname: lastname.val(), group: group}
+      href_url = window.location.href;
 
 
 
@@ -70,7 +71,7 @@ $( function() {
       data = {username: $( "#username" ).val(), password: $("#password").val(), email: $("#email").val(), birthdate: $("#datepicker").val(),
       gender : $('input[name=gender]:checked').val(), numberphone: $("#numberPhone").val(), firstname: $("#firstName").val(),lastname: $("#lastName").val(),group: $("#groupList" ).val()};
       var valid = true;
-      url = "http://localhost:9090/codentretien/administration/newUser"; //rendre dynamique
+      url = href_url + "/newUser"; //rendre dynamique
 
 
       allFields.removeClass( "ui-state-error" );
@@ -79,7 +80,7 @@ $( function() {
       var output;
         $.ajax({
          type: 'POST',
-         url:  "http://localhost:9090/codentretien/administration/useralreadyexist",
+         url:  href_url + "/useralreadyexist",
          data: {username: $("#username").val()},
          dataType: 'json',
          async: false,
@@ -128,6 +129,7 @@ $( function() {
             success: function(data){
               alert("Compte créé");
               dialog.dialog("close");
+              $('#userTable').trigger("reloadGrid");
                },
             error: function(data, status){
               alert("Erreur dans le requete ajax, veuillez contacter un admnistrateur");

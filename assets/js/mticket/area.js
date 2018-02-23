@@ -76,9 +76,9 @@ var Area = (function (_super) {
 
       this.__tasksIn.push(task.id());
       var data  = {id:parseInt(task.id()), state:parseInt(this.__status), reason:rsl};
-      var url   = "http://localhost:9090/codentretien/ticketmanagement/editState";
+      var url   = window.location.href + "/editState";
       var that  = this;
-
+      
       $.ajax({
         type:'POST',
         data:data,
