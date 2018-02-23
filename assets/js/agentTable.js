@@ -1,12 +1,17 @@
 $(document).ready(function () {
   href_url = window.location.href;
+  
   $("#agentTable").jqGrid({
-      url: href_url + '/groupList',
+      url: href_url + '/readTickets',
     datatype: "json",
-      colNames:['id',"Nom du groupe"],
+      colNames:['id',"Titre", "Description", "Salle", "Date de création"],
       colModel:[
-        {name:'idGroup',      index:'idGroup',      width:55,   template: "integerStr"},
-        {name:'labelGroup',   index:'labelGroup',   width:90                          },
+        {name:'ticket_id',            index:'ticket_id',            width:55,   template: "integerStr"},
+        {name:'ticket_title',         index:'ticket_title',         width:100                          },
+        {name:'ticket_description',   index:'ticket_description',   width:100                          },
+        {name:'room_label',           index:'room_label',           width:100                          },
+        {name:'ticket_creation',      index:'ticket_creation',      width:100                          }
+
       ],
       rowNum:10,
       rowList:[10,20,30],
@@ -17,7 +22,7 @@ $(document).ready(function () {
       //autowidth: true,
       //multiSort: true,
       pager : '#gridpager',
-      width: 200,
+      width: "auto",
       height: "auto",
       caption:"Table Gestion Agents",
   });

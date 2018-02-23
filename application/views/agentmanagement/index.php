@@ -12,3 +12,11 @@
 
 
 <table id="agentTable"></table>
+
+<div id="agentDialog">
+		<?php for($i = 0; $i < count($this->agents); $i++){ ?>
+			<input type="checkbox" value="<?php echo $this->agents[$i]->user_id ?>"><?php echo $this->agents[$i]->user_firstName." ".$this->agents[$i]->user_lastName ?></input>
+		<?php } ?>
+	</select>
+
+</div>
